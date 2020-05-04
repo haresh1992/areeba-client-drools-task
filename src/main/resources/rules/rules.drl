@@ -1,0 +1,19 @@
+package rules
+ 
+import com.drools.model.CardType
+rule "Card Type is Prepaid"
+	when 
+		cardTypeObject: CardType(type=="prepaid")
+	then
+		cardTypeObject.setLimits(999);
+		cardTypeObject.setLoadingLimits("Weekly");
+	end
+rule "Card Type is Credit"
+	when 
+		cardTypeObject: CardType(type=="credit")
+	then
+		cardTypeObject.setLimits(5000);
+		cardTypeObject.setLoadingLimits("Monthly");
+		cardTypeObject.setFees(500);
+		cardTypeObject.setCardUsage(10);
+	end
